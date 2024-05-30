@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Наши услуги</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Главная</a></li>
+            <li><a href="{% url 'about' %}">О нас</a></li>
+            <li><a href="{% url 'contact' %}">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <section id="services">
+        <h1>Наши услуги</h1>
+        <ul>
+            {% for service in services %}
+                <li>
+                    <h2>{{ service.name }}</h2>
+                    <p>{{ service.description }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h2>Добавить новую услугу</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Добавить</button>
+        </form>
+    </section>
+</body>
+</html>
